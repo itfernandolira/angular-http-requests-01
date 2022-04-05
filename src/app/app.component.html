@@ -3,6 +3,17 @@
     <div class="col-xs-12 col-md-6 col-md-offset-3">
       <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value)">
         <div class="form-group">
+          <input
+            type="hidden"
+            class="form-control"
+            id="userId"
+            required
+            ngModel
+            name="userId"
+            [(ngModel)]="userId"
+          />
+        </div>
+        <div class="form-group">
           <label for="title">Title</label>
           <input
             type="text"

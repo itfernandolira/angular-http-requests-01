@@ -15,6 +15,7 @@ export class AppComponent implements OnInit{
   }];
   userId = 1;
   isFetching = false;
+  error = null;
 
   constructor(private http: HttpClient) {}
 
@@ -47,11 +48,20 @@ export class AppComponent implements OnInit{
   private fetchPosts() {
     this.isFetching = true;
     this.http
-      .get('https://jsonplaceholder.typicode.com/posts')
-      .subscribe(posts => {
-        this.isFetching = false;
-        console.log(posts);
-        this.loadedPosts=<[]>posts;
-      })
+      .get('https://jsonplaceholderx.typicode.com/posts')
+      .subscribe({
+        next: (posts) => {
+          this.isFetching = false;
+          console.log(posts);
+          this.loadedPosts=<[]>posts;
+        },
+        error: (e) => {
+          this.error=e.message;
+          console.log(e);
+        },
+        complete: () => {
+          console.log("complete");
+        }
+      });
   }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -48,7 +48,11 @@ export class AppComponent implements OnInit{
   private fetchPosts() {
     this.isFetching = true;
     this.http
-      .get('https://jsonplaceholderx.typicode.com/posts')
+      .get('https://jsonplaceholder.typicode.com/posts', {
+        headers: new HttpHeaders({
+          'Custom-header': 'Hello!'
+        })
+      })
       .subscribe({
         next: (posts) => {
           this.isFetching = false;

@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  loadedPosts = [];
+  loadedPosts = [{
+    userId: 1,
+    id: 1,
+    title: 'title',
+    body: 'body'
+  }];
   userId = 1;
 
   constructor(private http: HttpClient) {}
@@ -43,6 +48,7 @@ export class AppComponent implements OnInit{
       .get('https://jsonplaceholder.typicode.com/posts')
       .subscribe(posts => {
         console.log(posts);
+        this.loadedPosts=<[]>posts;
       })
   }
 }
